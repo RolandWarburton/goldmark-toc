@@ -1,5 +1,4 @@
-module go.abhg.dev/goldmark/toc
-
+module github.com/rolandwarburton/goldmark-toc
 go 1.16
 
 require (

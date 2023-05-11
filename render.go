@@ -57,6 +57,7 @@ func (r *ListRenderer) renderItems(items Items) ast.Node {
 func (r *ListRenderer) renderItem(n *Item) ast.Node {
 	item := ast.NewListItem(0)
 
+	// creates a link, or title
 	if t := n.Title; len(t) > 0 {
 		title := ast.NewString(t)
 		title.SetRaw(true)
@@ -66,6 +67,7 @@ func (r *ListRenderer) renderItem(n *Item) ast.Node {
 			link.AppendChild(link, title)
 			item.AppendChild(item, link)
 		} else {
+			// title of the TOC
 			item.AppendChild(item, title)
 		}
 	}

@@ -38,6 +38,13 @@ type Extender struct {
 	//
 	// Defaults to 0 (no limit) if unspecified.
 	MaxDepth int
+
+	// MinDepth is the minimum depth of the table of contents.
+	// Headings with a level greater than the specified depth will be ignored.
+	// See the documentation for MaxDepth for more information.
+	//
+	// Defaults to 0 (no limit) if unspecified.
+	MinDepth int
 }
 
 // Extend adds support for rendering a table of contents to the provided
@@ -48,6 +55,7 @@ func (e *Extender) Extend(md goldmark.Markdown) {
 			util.Prioritized(&Transformer{
 				Title:    e.Title,
 				MaxDepth: e.MaxDepth,
+        MinDepth: e.MinDepth,
 			}, 100),
 		),
 	)

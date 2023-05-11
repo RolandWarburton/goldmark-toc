@@ -14,6 +14,7 @@ type InspectOption interface {
 
 type inspectOptions struct {
 	maxDepth int
+	minDepth int
 }
 
 // MaxDepth limits the depth of the table of contents.
@@ -62,6 +63,21 @@ func (d maxDepthOption) apply(opts *inspectOptions) {
 
 func (d maxDepthOption) String() string {
 	return fmt.Sprintf("MaxDepth(%d)", int(d))
+}
+
+// min depth
+func MinDepth(depth int) InspectOption {
+	return minDepthOption(depth)
+}
+
+type minDepthOption int
+
+func (d minDepthOption) apply(opts *inspectOptions) {
+	opts.minDepth = int(d)
+}
+
+func (d minDepthOption) String() string {
+	return fmt.Sprintf("MinDepth(%d)", int(d))
 }
 
 // Inspect builds a table of contents by inspecting the provided document.
@@ -135,16 +151,26 @@ func Inspect(n ast.Node, src []byte, options ...InspectOption) (*TOC, error) {
 			return ast.WalkSkipChildren, nil
 		}
 
+		if opts.minDepth > 0 && heading.Level <= opts.minDepth {
+			return ast.WalkSkipChildren, nil
+		}
+
+		// the stack represents the number of headings to render
+		// if the stack is less than the heading.level
+		// this will keep appending the parent of the last node in the stack
+		// until it reaches the correct level
+		fmt.Printf("stack: %d heading: %d\n", len(stack), heading.Level)
 		for len(stack) < heading.Level {
 			parent := stack[len(stack)-1]
 			stack = append(stack, lastChild(parent))
 		}
 
+		// the same as above, but will cut the stack to be the size of the heading level
 		for len(stack) > heading.Level {
 			stack = stack[:len(stack)-1]
 		}
 
-		parent := stack[len(stack)-1]
+		parent := stack[len(stack)-(opts.minDepth+1)]
 		target := lastChild(parent)
 		if len(target.Title) > 0 || len(target.Items) > 0 {
 			target = appendChild(parent)
