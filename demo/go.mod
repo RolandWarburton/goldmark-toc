@@ -1,10 +1,10 @@
-module go.abhg.dev/goldmark/toc/demo
+module github.com/rolandwarburton/goldmark-toc/demo
 
 go 1.20
 
-replace go.abhg.dev/goldmark/toc => ../
+replace github.com/rolandwarburton/goldmark-toc => ../
 
 require (
 	github.com/yuin/goldmark v1.5.4
-	go.abhg.dev/goldmark/toc v0.3.0
+	github.com/rolandwarburton/goldmark-toc v0.3.0
 )

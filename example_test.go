@@ -6,7 +6,7 @@ import (
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/text"
-	"go.abhg.dev/goldmark/toc"
+	"github.com/rolandwarburton/goldmark-toc"
 )
 
 func Example() {

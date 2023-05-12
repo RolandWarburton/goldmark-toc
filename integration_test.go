@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/parser"
-	"go.abhg.dev/goldmark/toc"
+	"github.com/rolandwarburton/goldmark-toc"
 	"gopkg.in/yaml.v3"
 )
 

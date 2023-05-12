@@ -1,4 +1,4 @@
-module go.abhg.dev/goldmark/toc/tools
+module github.com/rolandwarburton/goldmark-toc/tools
 
 go 1.16
 

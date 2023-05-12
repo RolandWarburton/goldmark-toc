@@ -8,7 +8,7 @@ import (
 
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/parser"
-	"go.abhg.dev/goldmark/toc"
+	"github.com/rolandwarburton/goldmark-toc"
 )
 
 func main() {
