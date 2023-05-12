@@ -159,7 +159,6 @@ func Inspect(n ast.Node, src []byte, options ...InspectOption) (*TOC, error) {
 		// if the stack is less than the heading.level
 		// this will keep appending the parent of the last node in the stack
 		// until it reaches the correct level
-		fmt.Printf("stack: %d heading: %d\n", len(stack), heading.Level)
 		for len(stack) < heading.Level {
 			parent := stack[len(stack)-1]
 			stack = append(stack, lastChild(parent))
